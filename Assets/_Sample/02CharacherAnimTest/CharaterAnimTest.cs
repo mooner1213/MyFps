@@ -21,13 +21,17 @@ namespace MySample
 
         [SerializeField] private float walkSpeed = 4f;
         [SerializeField] private float runSpeed = 7f;
-        private float movespeed = 0f;
+        [SerializeField] private float moveSpeed = 0f;
+
+        [SerializeField] private float accelerationSpeed = 0.1f; // 가속도
 
         private string isMoving = "isMove";     // 애니메이터 파라미터명 소문자로 수정
         private string isRunning = "isRun";     // 애니메이터 파라미터명 소문자로 수정
+        private string velocity = "Velocity";
 
         // 인풋 액션
         public InputActionReference moveAction;
+        public InputActionReference sprintAction;
         #endregion
 
         #region Property
@@ -54,6 +58,19 @@ namespace MySample
             { 
                 isRun = value;                   // StackOverflow 방지를 위해 필드(isRun)에 대입
                 animator.SetBool(isRunning, value);
+            }
+        }
+
+        public float MoveSpeed
+        {
+            get
+            {
+                return moveSpeed;
+            }
+            private set
+            {
+                moveSpeed = value;
+                animator.SetFloat(velocity, value);
             }
         }
         #endregion
@@ -103,7 +120,53 @@ namespace MySample
             {
                 IsRun = false;
             }
-        }
+
+            // 이동 속도 처리
+            if (IsMove && !IsRun) // 1. 걷기 상태
+            {
+                if (moveSpeed > walkSpeed)
+                {
+                    moveSpeed -= accelerationSpeed;
+                    if (moveSpeed <= walkSpeed)
+                    {
+                        moveSpeed = walkSpeed;
+                    }
+                }
+                else if (moveSpeed < walkSpeed)
+                {
+                    moveSpeed += accelerationSpeed;
+                    if (moveSpeed >= walkSpeed)
+                    {
+                        moveSpeed = walkSpeed;
+                    }
+                }
+            }
+            else if (IsMove && IsRun) // 2. 뛰기 상태
+            {
+                if (moveSpeed < runSpeed)
+                {
+                    moveSpeed += accelerationSpeed;
+                    if (moveSpeed >= runSpeed)
+                    {
+                        moveSpeed = runSpeed;
+                    }
+                }
+            }
+            else // 3. 정지 상태
+            {
+                if (moveSpeed > 0f)
+                {
+                    moveSpeed -= accelerationSpeed;
+                    if (moveSpeed <= 0f)
+                    {
+                        moveSpeed = 0f;
+                    }
+                }
+            }
+
+            // 애니메이터에 연산된 속도 값 업데이트
+            MoveSpeed = moveSpeed;
         #endregion
     }
+}
 }

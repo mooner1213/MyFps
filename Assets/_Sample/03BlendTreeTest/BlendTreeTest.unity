@@ -1562,7 +1562,10 @@ MonoBehaviour:
   isRun: 0
   walkSpeed: 4
   runSpeed: 7
+  moveSpeed: 0
+  accelerationSpeed: 0.1
   moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  sprintAction: {fileID: 0}
 --- !u!95 &1228446255
 Animator:
   serializedVersion: 7
@@ -1573,7 +1576,7 @@ Animator:
   m_GameObject: {fileID: 1228446253}
   m_Enabled: 1
   m_Avatar: {fileID: 900000, guid: 5ab14a1ab7548594ebbb404a05a8df47, type: 3}
-  m_Controller: {fileID: 9100000, guid: dbd8158d88705564a8e63a2bf4a2f38b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9cde35d0508c3ad43955eaa1920840c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

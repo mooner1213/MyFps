@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 3740508952024321924}
   - component: {fileID: 6421111346411349277}
   - component: {fileID: 3900143841449920839}
+  - component: {fileID: 5521111346411349277}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -406,3 +407,19 @@ MonoBehaviour:
   sensivity: 100
   topClamp: 45
   bottomClamp: -80
+--- !u!114 &5521111346411349277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273320688793975335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 789af16327b87644da5a90d9a65e71ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCasting
+  actionUI: {fileID: 0}
+  actionText: {fileID: 0}
+  maxDistance: 2
+  cameraTransform: {fileID: 0}

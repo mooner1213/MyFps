@@ -35,6 +35,8 @@ namespace MyFps
 
         [SerializeField] private float jumpHeight = 1.2f;           // 점프 높이
         [SerializeField] private float jumpTimeout = 0.1f;          // 점프 키입력 처리 타이머
+
+        [HideInInspector] public bool canMove = true;       // 외부에서 움직임을 제어할 수 있는 플래그
         #endregion
 
         #region Unity Event Method
@@ -49,6 +51,15 @@ namespace MyFps
         {
             // 그라운드 체크
             CheckGrounded();
+
+            // 움직일 수 없는 상태일 때 처리
+            if (!canMove)
+            {
+                // 중력가속도 누적 및 물리적 강제 중력 이동만 적용 (공중에 굳지 않게 처리)
+                verticalVelocity += gravity * Time.deltaTime;
+                controller.Move(Vector3.up * Time.deltaTime * verticalVelocity);
+                return;
+            }
 
             // 중력 및 점프 처리
             GravityAndJump();
