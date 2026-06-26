@@ -1,73 +1,128 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 namespace MyFps
 {
     /// <summary>
-    /// 문 개방 상호작용 컴포넌트.
+    /// 플레이어와 인터랙티브 기능 구현
+    /// 가까이 가서 마우스 가져가면 액션 UI 보여준다
+    /// 액션 : 문을 연다
     /// </summary>
     public class DoorCellOpen : MonoBehaviour
     {
         #region Variables
-        [Header("Interaction Settings")]
-        [SerializeField] private Animator doorAnimator;         // 문 애니메이터
-        [SerializeField] private string animParameter = "isOpen"; // 애니메이터 파라미터명
-        [SerializeField] private AudioSource audioSource;       // 문 개방 효과음 재생용 오디오 소스
+        //UI 오브젝트
+        public GameObject actionUI;
+        public GameObject extraCross;
+        public TextMeshProUGUI actionText;
 
-        private Collider myCollider;
-        private bool isOpened = false;
+        private Collider doorCollider;
+
+        private bool currentCasting = false;        //현재 캐스팅 상태
+        private bool wasCasting = false;            //이전 캐스팅 상태
+
+        //인터랙브 액션
+        public InputActionReference interactAction;
+        public string action = "action Text";       //인터랙티브 액션 내용
+
+        public Animator animator;
+        private string isOpen = "IsOpen";
+
+        public AudioSource audioSource;
         #endregion
 
-        #region Unity Event Methods
+        #region Unity Event Method
         private void Awake()
         {
-            myCollider = GetComponent<Collider>();
-            
-            // 애니메이터 자동 탐색
-            if (doorAnimator == null)
+            doorCollider = GetComponent<Collider>();
+            if (doorCollider == null)
             {
-                doorAnimator = GetComponentInParent<Animator>();
+                Debug.LogError("DoorCellOpen: Collider component not found!");
+            }
+        }
+
+        private void OnEnable()
+        {            
+            interactAction.action.Enable();
+        }
+
+        private void OnDisable()
+        {
+            interactAction.action.Disable();
+        }
+
+        private void Update()
+        {
+            //플레이어의 캐스팅 거리가 체크
+            if (PlayerCasting.DistanceFromTarget > 2f)
+            {
+                HideActionUI();
+                wasCasting = false;
+                return;
             }
 
-            // 오디오 소스 자동 탐색
-            if (audioSource == null)
+            // 이 오브젝트의 캐스팅한 오브젝트인 체크
+            currentCasting = PlayerCasting.CastGameObject != null && PlayerCasting.CastGameObject == this.gameObject;
+
+            // 상태 변화 감지: 경계
+            if (currentCasting != wasCasting && currentCasting == true)  
             {
-                audioSource = GetComponent<AudioSource>();
+                //캐스팅하고 있지 않다가 캐스팅을 시작할때
+                ShowActionUI();
             }
+            else if (currentCasting != wasCasting && currentCasting == false)
+            {
+                //캐스팅 하고 있다가 캐스팅을 놓치는것을 시작할때
+                HideActionUI();
+            }
+
+            if (currentCasting && interactAction.action.WasPressedThisFrame())
+            {
+                DoAction();
+            }
+
+            //was 상태 저장
+            wasCasting = currentCasting;
         }
         #endregion
 
-        #region Custom Methods
-        public void OnInteract()
+        #region Custom Method
+        void DoAction()
         {
-            if (!isOpened)
-            {
-                OpenDoor();
-            }
-        }
+            //인터랙티브 액션 - open the door
+            animator.SetBool(isOpen, true);
 
-        private void OpenDoor()
-        {
-            isOpened = true;
-
-            // 문 여는 애니메이션 실행 (메카님)
-            if (doorAnimator != null)
-            {
-                doorAnimator.SetBool(animParameter, true);
-            }
-
-            // Door Trigger 제거 (콜라이더 비활성화) -> 플레이어가 통과 가능
-            if (myCollider != null)
-            {
-                myCollider.enabled = false;
-            }
-
-            // 문 사운드 출력
-            if (audioSource != null)
+            //사운드 플레이, AudioSource null 체크
+            if (audioSource)
             {
                 audioSource.Play();
             }
 
-            Debug.Log("Door opened and trigger collider disabled.");
+            //초기화
+            HideActionUI();
+            doorCollider.enabled = false;
+        }
+
+        void ShowActionUI()
+        {
+            if (actionUI != null)
+            {
+                actionUI.SetActive(true);
+                extraCross.SetActive(true);
+                actionText.text = action;
+            }
+        }
+
+        void HideActionUI()
+        {
+            if (actionUI != null)
+            {
+                actionUI.SetActive(false);
+                extraCross.SetActive(false);
+                actionText.text = "";
+            }
         }
         #endregion
     }

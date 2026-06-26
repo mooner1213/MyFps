@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +20,7 @@ namespace MyFps
         private Vector2 look;
 
         //점프
-        private bool isJump;
+        [SerializeField] private bool isJump;
         #endregion
 
         #region Property
@@ -31,16 +30,16 @@ namespace MyFps
             private set { move = value; }
         }
 
-        public Vector2 Look
-        {
-            get { return look; }
-            private set { look = value; }
-        }
-
         public bool IsSprint
         {
             get { return isSprint; }
             private set { isSprint = value; }
+        }
+
+        public Vector2 Look
+        {
+            get { return look; }
+            private set { look = value; }
         }
 
         public bool IsJump
@@ -82,12 +81,11 @@ namespace MyFps
             {
                 IsJump = true;
             }
-
             if(inputActions.Player.Sprint.WasPressedThisFrame())
             {
                 IsSprint = true;
             }
-            else if(inputActions.Player.Sprint.WasReleasedThisFrame())
+            else if (inputActions.Player.Sprint.WasReleasedThisFrame())
             {
                 IsSprint = false;
             }

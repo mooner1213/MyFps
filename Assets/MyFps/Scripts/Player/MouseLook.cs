@@ -33,7 +33,7 @@ namespace MyFps
 
         private void Start()
         {
-            // 마우스 커서 초기화
+            //마우스 커서 초기화
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }

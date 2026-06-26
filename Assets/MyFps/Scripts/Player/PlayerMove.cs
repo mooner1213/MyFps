@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 namespace MyFps
@@ -14,29 +13,29 @@ namespace MyFps
         private CharacterController controller;
         private CharacterInput input;
 
-        [Header ("Player")]     //헤더 특성 : 직열화된 속성중에 Player와 관련된 내용이다 표시
         //이동
+        [Header("Move")]     //헤더 특성 : 직열화된 속성중에 Player와 관련된 내용이다 표시
         [SerializeField] private float walkSpeed = 4f;      //걷는 속도
         [SerializeField] private float sprintSpeed = 7f;    //뛰는 속도
         private float moveSpeed;                            //이동 속도
 
         //그라운드 체크
-        [Header("Gorund Check")]
+        [Header("Ground Check")]
         [SerializeField] private bool isGrounded = false;
 
-        [SerializeField] private float groundedOffset = -0.14f;     // 체크 지점 조정값
-        [SerializeField] private float groundedRadius = 0.5f;       // 체크 범위 영역
-        public LayerMask groundLayers;                              // 그라운드 레이어 체크
+        [SerializeField] private float groundedOffset = -0.14f;     //체크 지점 조정값
+        [SerializeField] private float groundedRadius = 0.5f;       //체크 범위 영역
+        public LayerMask groundLayers;                              //그라운드 레이어 체크 
 
         //점프
         [Header("Jump")]
-        [SerializeField] private float gravity = -9.81f;            // 중력값
-        [SerializeField] private float verticalVelocity = 0f;       // y축의 속도 값
+        [SerializeField] private float gravity = -9.81f;            //중력
+        [SerializeField] private float verticalVelocity = 0;        //y축의 속도 값
 
-        [SerializeField] private float jumpHeight = 1.2f;           // 점프 높이
-        [SerializeField] private float jumpTimeout = 0.1f;          // 점프 키입력 처리 타이머
+        [SerializeField] private float jumpHeight = 1.2f;           //점프 높이
+        [SerializeField] private float jumpTimeout = 0.1f;          //점프 키입력 처리 타이머
 
-        [HideInInspector] public bool canMove = true;       // 외부에서 움직임을 제어할 수 있는 플래그
+        [HideInInspector] public bool canMove = true;               // 외부에서 움직임을 제어할 수 있는 플래그
         #endregion
 
         #region Unity Event Method
@@ -49,7 +48,7 @@ namespace MyFps
 
         private void Update()
         {
-            // 그라운드 체크
+            //그라운드 체크
             CheckGrounded();
 
             // 움직일 수 없는 상태일 때 처리
@@ -61,7 +60,7 @@ namespace MyFps
                 return;
             }
 
-            // 중력 및 점프 처리
+            //중력 및 점프처리
             GravityAndJump();
 
             //이동
@@ -72,40 +71,35 @@ namespace MyFps
         #region Custom Method
         void CheckGrounded()
         {
-            // 체크 위치 설정 (발 아래쪽)
-            Vector3 checkPosition = new Vector3(
-                transform.position.x,
-                transform.position.y + groundedOffset,  // +로 수정
-                transform.position.z
-            );
+            //캐릭터컨트롤러에서 체크값 가져오기
+            //isGrounded = controller.isGrounded;
 
-            // 반환값을 isGrounded에 저장
-            isGrounded = Physics.CheckSphere(
-                checkPosition,
-                groundedRadius,
-                groundLayers,
-                QueryTriggerInteraction.Ignore
-            );
+            //체크 위치 설정
+            Vector3 checkPosition = new Vector3(transform.position.x,
+                transform.position.y - groundedOffset, transform.position.z);
+            //체크 지점에서 그라운드 레이어가 있는지 체크
+            isGrounded = Physics.CheckSphere(checkPosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
+
         }
 
         void GravityAndJump()
         {
-            if (isGrounded)
+            if(isGrounded)
             {
-                // 지면에 있을때 버티컬 벨로씨티 값을 고정 시킨다.
+                //지면에 있을때 verticalVelocity 값을 고정 시킨다
                 if(verticalVelocity < 0f)
                 {
                     verticalVelocity = -2f;
                 }
 
-                // 점프 입력 체크
+                //점프 입력 체크 
                 if (input.IsJump && jumpTimeout <= 0f)
                 {
-                    // 점프 높이 만큼 속도를 지정한다.
+                    //점프 높이 만큼 속도를 지정한다
                     verticalVelocity = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
                 }
 
-                if (jumpTimeout >= 0f)
+                if(jumpTimeout >= 0f)
                 {
                     jumpTimeout -= Time.deltaTime;
                 }
@@ -116,7 +110,7 @@ namespace MyFps
                 jumpTimeout = 0.1f;
             }
 
-            // 중력 처리
+            //중력 처리
             verticalVelocity += gravity * Time.deltaTime;
         }
 
@@ -137,8 +131,9 @@ namespace MyFps
                 inputDirection = transform.right * input.Move.x + transform.forward * input.Move.y;
             }
 
-            //이동 : 방향(상하좌우) * Time.deltatime * speed + 위, 아래(상하) * Time.deltatime * speed 중력
-            controller.Move(inputDirection * Time.deltaTime * moveSpeed + Vector3.up * Time.deltaTime * verticalVelocity);
+            //이동 : 방향(앞뒤좌우) * Time.deltatime * speed + (위아래) * Time.deltatime * verticalVelocity
+            controller.Move(inputDirection * Time.deltaTime * moveSpeed
+                + Vector3.up * Time.deltaTime * verticalVelocity);
         }
         #endregion
 
