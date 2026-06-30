@@ -7,7 +7,7 @@ namespace MyFps
 {
     /// <summary>
     /// 플레이어와 인터랙티브 기능 구현
-    /// 가까이 가서 마우스 가져가면 액션 UI 보여준다
+    /// 가까이 가서 crosshair 캐스팅하면 액션 UI 보여준다
     /// 액션 : 문을 연다
     /// </summary>
     public class DoorCellOpen : MonoBehaviour
@@ -40,6 +40,29 @@ namespace MyFps
             if (doorCollider == null)
             {
                 Debug.LogError("DoorCellOpen: Collider component not found!");
+            }
+        }
+
+        private void Start()
+        {
+            // 오디오 소스 자동 설정
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    audioSource = gameObject.AddComponent<AudioSource>();
+                }
+            }
+
+            // 오디오 클립이 설정되지 않았을 경우 Resources에서 CreakyDoor 로드
+            if (audioSource.clip == null)
+            {
+                audioSource.clip = Resources.Load<AudioClip>("CreakyDoor");
+                if (audioSource.clip != null)
+                {
+                    Debug.Log("[DoorCellOpen] CreakyDoor audio clip successfully loaded from Resources.");
+                }
             }
         }
 

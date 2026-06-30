@@ -44,6 +44,12 @@ namespace MyFps
             //참조
             controller = GetComponent<CharacterController>();
             input = GetComponent<CharacterInput>();
+
+            // 체력 및 데미지 시스템 동적 부착
+            if (GetComponent<PlayerHealth>() == null)
+            {
+                gameObject.AddComponent<PlayerHealth>();
+            }
         }
 
         private void Update()
