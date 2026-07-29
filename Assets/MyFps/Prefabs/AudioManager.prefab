@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5348961415637845331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7778541724970860032}
+  - component: {fileID: 1439579180524097874}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7778541724970860032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348961415637845331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.22985, y: 0.94675, z: 0.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1439579180524097874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348961415637845331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7be266b6b325654ab58d7cb1b08b44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MyFps.AudioManager
+  sounds:
+  - name: MenuBgm
+    clip: {fileID: 8300000, guid: 6136e56581a1c61468a9e3937bab904e, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: MenuButton
+    clip: {fileID: 8300000, guid: 7b30fda238906754e964e217707735da, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: Hurt01
+    clip: {fileID: 8300000, guid: bfadbe07460505e43b015c75c816ac7f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: Hurt02
+    clip: {fileID: 8300000, guid: 4c4215bd3b95a524c839389846c28e16, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: Hurt03
+    clip: {fileID: 8300000, guid: bb473b4c924385a4ca3d4a6a85711a73, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: Bgm01
+    clip: {fileID: 8300000, guid: f580cc5b1c335bd49b3156a71ae24029, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: Bgm02
+    clip: {fileID: 8300000, guid: b6ad77c55997a294bbaef54ade9cf34e, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  - name: IntroBgm
+    clip: {fileID: 8300000, guid: 36d4cc52eaf552144a10e73c8e7b95ab, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    audioSource: {fileID: 0}
+  bgmSound: 
+  audioMixer: {fileID: 24100000, guid: cb7a211cd32449144a02b94e4987eaa5, type: 2}

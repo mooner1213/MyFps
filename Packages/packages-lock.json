@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.ivanmurzak.unity.mcp": {
+      "version": "file:com.ivanmurzak.unity.mcp",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.33",
+        "com.unity.modules.uielements": "1.0.0",
+        "extensions.unity.playerprefsex": "2.1.5"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.12",
       "depth": 0,
@@ -218,6 +228,15 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.visualeffectgraph": {
+      "version": "17.3.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.shadergraph": "17.3.0",
+        "com.unity.render-pipelines.core": "17.3.0"
+      }
+    },
     "com.unity.visualscripting": {
       "version": "1.9.11",
       "depth": 0,
@@ -227,6 +246,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "extensions.unity.playerprefsex": {
+      "version": "2.1.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

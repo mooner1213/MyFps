@@ -21,9 +21,6 @@ namespace MyFps
 
         //점프
         [SerializeField] private bool isJump;
-
-        //공격
-        [SerializeField] private bool isAttack;
         #endregion
 
         #region Property
@@ -49,12 +46,6 @@ namespace MyFps
         {
             get { return isJump; }
             set { isJump = value; }
-        }
-
-        public bool IsAttack
-        {
-            get { return isAttack; }
-            set { isAttack = value; }
         }
         #endregion
 
@@ -98,16 +89,6 @@ namespace MyFps
             {
                 IsSprint = false;
             }
-
-            if (inputActions.Player.Attack.WasPressedThisFrame())
-            {
-                IsAttack = true;
-            }
-        }
-
-        private void LateUpdate()
-        {
-            IsAttack = false;
         }
         #endregion
 

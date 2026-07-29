@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - CinemachineTarget
+  - Enemy
+  - CCTV
+  - Play
   layers:
   - Default
   - TransparentFX
@@ -12,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - CCTV
+  - Weapon
   - 
   - 
   - 

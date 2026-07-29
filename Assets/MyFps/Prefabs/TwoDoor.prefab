@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3613753648313706070}
   - component: {fileID: 113185460503603048}
+  - component: {fileID: 4457255621768552822}
   m_Layer: 0
   m_Name: TwoDoor
   m_TagString: Untagged
@@ -58,6 +59,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4457255621768552822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141754026062223109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078378bdb813462418da3f6afaad09f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MyFps.Door
+  isActive: 0
+  enemies: []
 --- !u!1001 &77069364186678848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,6 +125,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8249556, guid: 088b5f04d52a542ec975e88d7d9934f5, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8928948515263738069, guid: cb7a211cd32449144a02b94e4987eaa5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -296,6 +315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8249556, guid: 088b5f04d52a542ec975e88d7d9934f5, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8928948515263738069, guid: cb7a211cd32449144a02b94e4987eaa5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
