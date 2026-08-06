@@ -25,7 +25,7 @@ namespace MyFps
         private string isOpen = "IsOpen";
 
         //적 등록 하기
-        public Robot[] enemies;
+        public GunMan[] enemies;
         #endregion
 
         #region Property
@@ -50,7 +50,10 @@ namespace MyFps
         private void Start()
         {
             //초기화
-            animator.SetBool(isOpen, isActive);
+            if(isActive)
+            {
+                animator.SetBool(isOpen, true);
+            }
         }
         #endregion
 
@@ -64,15 +67,9 @@ namespace MyFps
             OnActivate?.Invoke();
 
             //
-            if (enemies != null)
+            foreach (var enemy in enemies)
             {
-                foreach (var enemy in enemies)
-                {
-                    if (enemy != null)
-                    {
-                        enemy.IsDetecting = true;
-                    }
-                }
+                enemy.IsDetecting = true;
             }
         }
 
@@ -84,15 +81,9 @@ namespace MyFps
             //문을 닫을때 등록되어 있는 함수 호출
             OnDeActivate?.Invoke();
 
-            if (enemies != null)
+            foreach (var enemy in enemies)
             {
-                foreach (var enemy in enemies)
-                {
-                    if (enemy != null)
-                    {
-                        enemy.IsDetecting = false;
-                    }
-                }
+                enemy.IsDetecting = false;
             }
         }
         #endregion

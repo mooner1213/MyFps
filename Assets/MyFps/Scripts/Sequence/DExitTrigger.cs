@@ -14,6 +14,7 @@ namespace MyFps
         //참조
         public SceneFader fader;
         [SerializeField] private string loadToScene = "PlayScene02";
+        [SerializeField] private int loadToSceneNumber = 3;
 
         public Animator twoDoorAnimator;
         public AudioSource jumpScare;
@@ -31,11 +32,13 @@ namespace MyFps
             twoDoorAnimator.SetBool(isOpen, true);
             AudioManager.Instance.StopBgm();
 
-            //씬 클리어 처리...
-
+            //씬 클리어 처리...             
+            //게임 데이터 저장 - 다음 씬번호, AmmoCount, Health 저장
+            PlayerStats.Instance.SceneNumber = loadToSceneNumber;
+            SaveLoad.SaveData();
 
             yield return new WaitForSeconds(1f);
-            fader.FadeTo(loadToScene);
+            fader.FadeTo(loadToSceneNumber);
 
         }
         #endregion

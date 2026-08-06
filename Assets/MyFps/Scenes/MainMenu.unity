@@ -176,10 +176,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Art            Y.J  Park
+  m_text: "\uC544\uD2B8        \uAE40 \uD55C\uBCC4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
-  m_sharedMaterial: {fileID: 4804676765520433604, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
+  m_sharedMaterial: {fileID: -513833968758666017, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -313,10 +313,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Program    H.S Lee
+  m_text: "\uD504\uB85C\uADF8\uB7A8   \uBC31 \uB450\uC0B0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
-  m_sharedMaterial: {fileID: 4804676765520433604, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
+  m_sharedMaterial: {fileID: -513833968758666017, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1938,7 +1938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &614360947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2227,7 +2227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &715613589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2465,10 +2465,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Special Tanks  Boss
+  m_text: "\uADF8\uB9AC\uACE0     \uC0AC\uC7A5\uB2D8"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
-  m_sharedMaterial: {fileID: 4804676765520433604, guid: 9a665038942a60443a7f4e2ad38570aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
+  m_sharedMaterial: {fileID: -513833968758666017, guid: c079f24d71af0774182d10ce65060fa0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3152,7 +3152,7 @@ Transform:
   m_GameObject: {fileID: 1005539364}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -12.6, y: 24.1, z: 21.8}
+  m_LocalPosition: {x: 2.52, y: 2.5, z: -0.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6202,6 +6202,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693882449}
   m_CullTransparentMesh: 1
+--- !u!1001 &1720829951
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 517386985208599630, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.21885
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
 --- !u!1 &1763204569
 GameObject:
   m_ObjectHideFlags: 0
@@ -11453,10 +11510,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   fader: {fileID: 1838461279}
-  loadToScene: PlayScene01
+  loadToScene: Intro
   mainMenu: {fileID: 1231916414}
   optionUI: {fileID: 998362093}
-  creditUI: {fileID: 1910394201}
+  creditUI: {fileID: 614360946}
+  loadGame: {fileID: 215917938}
   audioMixer: {fileID: 24100000, guid: cb7a211cd32449144a02b94e4987eaa5, type: 2}
   bgmSlider: {fileID: 1663827838}
   sfxSlider: {fileID: 275180246}
@@ -12008,6 +12066,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1363372242}
   - {fileID: 1005539366}
+  - {fileID: 4646727497371489972}
+  - {fileID: 1720829951}
   - {fileID: 1531342560}
   - {fileID: 859374455}
   - {fileID: 1942460121}
@@ -12015,4 +12075,3 @@ SceneRoots:
   - {fileID: 7886450965167785927}
   - {fileID: 1563757468}
   - {fileID: 537601621}
-  - {fileID: 4646727497371489972}

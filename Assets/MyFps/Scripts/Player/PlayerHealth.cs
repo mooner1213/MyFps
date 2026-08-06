@@ -22,7 +22,15 @@ namespace MyFps
         #endregion
 
         #region Properties
-        public float CurrentHealth => currentHealth;
+        public float CurrentHealth
+        {
+            get {  return currentHealth; }
+            private set
+            {
+                currentHealth = value;
+                PlayerStats.Instance.Health = currentHealth;
+            }
+        }
         public bool IsDeath => isDeath;
         #endregion
 
@@ -30,7 +38,7 @@ namespace MyFps
         private void Start()
         {
             //초기화
-            currentHealth = maxHealth;
+            CurrentHealth = PlayerStats.Instance.Health;
         }
         #endregion
 
@@ -41,8 +49,8 @@ namespace MyFps
             if (isDeath)
                 return;
 
-            currentHealth -= damage;
-            //Debug.Log($"{gameObject.name} currentHealth: {currentHealth}");
+            CurrentHealth -= damage;
+            //Debug.Log($"{gameObject.name} currentHealth: {currentHealth}");            
 
             //데미지 입을때 등록된 함수 호출
             onDamaged?.Invoke(damage);
@@ -50,7 +58,7 @@ namespace MyFps
             //데미지 효과 처리(VFX, SFX)
 
             //죽음 체크
-            if (currentHealth <= 0f && isDeath == false)
+            if (CurrentHealth <= 0f && isDeath == false)
             {
                 Die();
             }

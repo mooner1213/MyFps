@@ -7850,6 +7850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MyFps.DExitTrigger
   fader: {fileID: 2137752084}
   loadToScene: PlayScene02
+  loadToSceneNumber: 3
   twoDoorAnimator: {fileID: 2012444671}
   jumpScare: {fileID: 961091259}
 --- !u!1 &470561373
@@ -8678,6 +8679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701430636}
+  - component: {fileID: 701430637}
   - component: {fileID: 701430635}
   m_Layer: 0
   m_Name: SceneManager
@@ -8718,6 +8720,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701430637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701430634}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac1dc3316aedb845bb7c968587aa6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MyFps.AutoSave
 --- !u!1 &705335281
 GameObject:
   m_ObjectHideFlags: 0
@@ -15880,6 +15894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 517386985208599630, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1659909767703586341, guid: b8ed7d376ece1004ea1968e25f63af12, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -16419,7 +16437,7 @@ Transform:
   m_GameObject: {fileID: 8734565902749786246}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -17.5, y: -0.1, z: 20}
+  m_LocalPosition: {x: -17.5, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16600,12 +16618,7 @@ MonoBehaviour:
   moveSpeed: 2
   attakRange: 1.5
   attackDamage: 5
-  attackTimer: 2
-  detectRange: 10
   maxHealth: 20
-  isDetecting: 0
-  attackDuration: 1.35
-  attackDamageDelay: 0.45
 --- !u!33 &8740571088937653076
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -30,13 +30,6 @@ namespace MyFps
             playerHealth = GetComponent<PlayerHealth>();
         }
 
-        private void Start()
-        {
-            // 씬 진입 시 자동 저장 수행 (씬 빌드 인덱스 기록)
-            int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-            SaveSystem.Save(currentSceneIndex);
-        }
-
         private void OnEnable()
         {
             //데미지,죽음 이벤트에 함수 등록
@@ -71,10 +64,7 @@ namespace MyFps
         IEnumerator DamageEffect()
         {
             //화면 흔들림 효과
-            if (CinemachineShake.Instance != null)
-            {
-                CinemachineShake.Instance.ShakeCarmera();
-            }
+            CinemachineShake.Instance.ShakeCarmera();
 
             //데미지 플래시 효과
             damagedFlash.SetActive(true);

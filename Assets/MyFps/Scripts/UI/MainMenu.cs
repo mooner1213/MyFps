@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace MyFps
 {
@@ -22,17 +23,16 @@ namespace MyFps
         public GameObject mainMenu;
         public GameObject optionUI;
         public GameObject creditUI;
+        public GameObject loadGame;
 
-        //불러오기 버튼
-        public Button loadGameBtn;
+        //저장된 씬 번호
+        private int sceneNumber;
 
         //옵션 - 볼륨 조절
         public AudioMixer audioMixer;
 
         public Slider bgmSlider;        //배경음 볼륨조절 슬라이더
         public Slider sfxSlider;        //효과음 볼륨조절 슬라이더
-
-        //
 
         //오디오믹서 파라미터, PlayerPrefs의 키값
         private const string BgmVolume = "BgmVolume";
@@ -42,29 +42,24 @@ namespace MyFps
         #region Unity Event Method
         private void Start()
         {
-            //게임 처음 실행하면 저장된 옵션값 로드하기
-            LoadOptions();
+            //게임 데이터 초기화
+            GameDataInit();
+
+            //로드게임 메뉴 셋팅
+            if (sceneNumber < 0)
+            {
+                loadGame.SetActive(false);
+            }
+            else
+            {
+                loadGame.SetActive(true);
+            }
 
             //참조
             audioManager = AudioManager.Instance;
-            if (audioManager == null)
-            {
-                Debug.LogWarning("MainMenu: AudioManager.Instance is null. Sound playback will be disabled.");
-            }
 
             //배경음 플레이
-            audioManager?.PlayBgm("MenuBgm");
-
-            // 불러오기 버튼 활성화 조건 체크
-            if (loadGameBtn != null)
-            {
-                loadGameBtn.interactable = SaveSystem.HasSaveFile();
-            }
-
-            // UI 초기 활성화 상태 설정
-            if (mainMenu != null) mainMenu.SetActive(true);
-            if (optionUI != null) optionUI.SetActive(false);
-            if (creditUI != null) creditUI.SetActive(false);
+            audioManager.PlayBgm("MenuBgm");
 
             //마우스 커서 초기화
             Cursor.lockState = CursorLockMode.None;
@@ -72,44 +67,48 @@ namespace MyFps
         }
         #endregion
 
-        #region Custom Method        
+        #region Custom Method  
+        //게임 데이터 초기화
+        private void GameDataInit()
+        {
+            //게임 처음 실행하면 저장된 옵션값 로드하기
+            LoadOptions();
+
+            //파일에서 저장된 데이터 가져오기
+            PlayData playData = SaveLoad.LoadData();
+            PlayerStats.Instance.PlayerStatsInit(playData);
+
+            //저장된 씬 번호 가져오기
+            //sceneNumber = PlayerPrefs.GetInt("SceneNumber", -1);
+            sceneNumber = PlayerStats.Instance.SceneNumber;
+            //Debug.Log($"MainMenu Load sceneNumber : {sceneNumber}");
+        }
+
         public void NewGame()
         {
             //사운드 처리
-            audioManager?.Stop("MenuBgm");
-            audioManager?.Play("MenuButton");
+            audioManager.Stop("MenuBgm");
+            audioManager.Play("MenuButton");
 
-            if (fader != null)
-            {
-                fader.FadeTo(loadToScene);
-            }
-            else
-            {
-                Debug.LogError("MainMenu: SceneFader is not assigned!");
-            }
+            //게임 데이터 초기화
+            PlayerStats.Instance.PlayerStatsInit(null);
+            
+            fader.FadeTo(loadToScene);
         }
 
         public void LoadGame()
         {
             //사운드 처리            
-            audioManager?.Play("MenuButton");
-
-            SaveData data = SaveSystem.Load();
-            if (data != null && fader != null)
-            {
-                Debug.Log($"Load Game! Loading scene index: {data.sceneBuildIndex}");
-                fader.FadeTo(data.sceneBuildIndex);
-            }
-            else
-            {
-                Debug.LogWarning("MainMenu: LoadGame failed (data or fader is null)");
-            }
+            audioManager.Stop("MenuBgm");
+            audioManager.Play("MenuButton");
+            
+            fader.FadeTo(sceneNumber);
         }
 
         public void Options()
         {
             //사운드 처리            
-            audioManager?.Play("MenuButton");
+            audioManager.Play("MenuButton");
 
             ShowOptions();
         }
@@ -117,14 +116,17 @@ namespace MyFps
         public void Credits()
         {
             //사운드 처리            
-            audioManager?.Play("MenuButton");
+            audioManager.Play("MenuButton");
             ShowCredit();
         }
 
         public void QuitGame()
         {
             //사운드 처리            
-            audioManager?.Play("MenuButton");
+            audioManager.Play("MenuButton");
+
+            //저장된 게임 리셋
+            PlayerPrefs.DeleteAll();
 
             Debug.Log("Quit Game");
             Application.Quit();
@@ -151,10 +153,7 @@ namespace MyFps
             PlayerPrefs.SetFloat(BgmVolume, value);
 
             //Debug.Log($"BgmVolume: {value}");
-            if (audioMixer != null)
-            {
-                audioMixer.SetFloat(BgmVolume, value);
-            }
+            audioMixer.SetFloat(BgmVolume, value);
         }
 
         //효과음 슬라이더로 볼륨 조절
@@ -164,37 +163,23 @@ namespace MyFps
             PlayerPrefs.SetFloat(SfxVolume, value);
 
             //Debug.Log($"SfxVolume: {value}");
-            if (audioMixer != null)
-            {
-                audioMixer.SetFloat(SfxVolume, value);
-            }
+            audioMixer.SetFloat(SfxVolume, value);
         }
 
         //저장된 옵션 값 로드하기
         private void LoadOptions()
         {
-            if (audioMixer == null)
-            {
-                Debug.LogWarning("MainMenu: AudioMixer is not assigned!");
-                return;
-            }
-
             //배경음, 효과음 가져오기
             float bgmVolume = PlayerPrefs.GetFloat(BgmVolume, 0f);
             //Debug.Log($"Load bgmVolume : {bgmVolume}");
             audioMixer.SetFloat(BgmVolume, bgmVolume);
-            if (bgmSlider != null)
-            {
-                bgmSlider.value = bgmVolume;
-            }
+            bgmSlider.value = bgmVolume;
 
             float sfxVolume = PlayerPrefs.GetFloat(SfxVolume, 0f);
             //Debug.Log($"Load sfxVolume : {sfxVolume}");
             audioMixer.SetFloat(SfxVolume, sfxVolume);
-            if (sfxSlider != null)
-            {
-                sfxSlider.value = sfxVolume;
-            }
+            sfxSlider.value = sfxVolume;
+
         }
 
         //크레딧 UI

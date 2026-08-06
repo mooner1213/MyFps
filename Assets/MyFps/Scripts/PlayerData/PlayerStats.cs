@@ -23,6 +23,11 @@ namespace MyFps
     {
         #region Varibles
         private int ammoCount;
+        private float health;
+        private int sceneNumber;
+
+        //체력 초기값
+        [SerializeField] private float maxHealth = 20f;
 
         //퍼즐 아이템 획득 여부
         [SerializeField] private bool[] puzzleItems;
@@ -30,18 +35,52 @@ namespace MyFps
 
         #region Property
         public int AmmoCount => ammoCount;
+
+        public float Health
+        {
+            get {  return health; }
+            set {  health = value; }
+        }
+
+        public int SceneNumber
+        {
+            get { return sceneNumber; }
+            set { sceneNumber = value; }
+        }
         #endregion
 
         #region Unity Event Method
-        private void Start()
+        protected override void Awake()
         {
-            //초기화
-            ammoCount = 0;
-            puzzleItems = new bool[(int)PuzzleItem.MaxPuzzleItem];            
+            base.Awake();
+
+            //PlayerStats 초기화
+            PlayerStatsInit(null);
         }
         #endregion
 
         #region Custom Method
+        //매개변수로 저장된 데이터 가져오기 - 플레이어 스탯 초기화
+        public void PlayerStatsInit(PlayData playData)
+        {
+            //저장된 데이터 체크
+            if(playData != null)
+            {
+                sceneNumber = playData.sceneNumber;
+                health = playData.health;
+                ammoCount = playData.ammoCount;
+            }
+            else
+            {
+                sceneNumber = -1;
+                health = maxHealth;
+                ammoCount = 0;
+            }
+
+            puzzleItems = new bool[(int)PuzzleItem.MaxPuzzleItem];
+        }
+
+
         //탄환 추가
         public void AddAmmo(int amount)
         {

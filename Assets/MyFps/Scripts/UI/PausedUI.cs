@@ -65,14 +65,6 @@ namespace MyFps
             Time.timeScale = 1f;
             fader.FadeTo(loadToScene);
         }
-
-        // 수동 저장
-        public void SaveGame()
-        {
-            int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-            SaveSystem.Save(currentSceneIndex);
-            Debug.Log("Manual Save Success!");
-        }
         #endregion
 
     }
